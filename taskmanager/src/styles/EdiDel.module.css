@@ -1,0 +1,45 @@
+.container {
+    width: 160px;
+    height: 93px;
+    background-color: #000;
+    position: absolute;
+    top: 75px;
+    right: 30px;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.container .delet {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: transparent;
+    font-weight: 500;
+    color: red;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.container .edit:hover,
+.container .delet:hover {
+    background-color: rgba(255, 255, 255, 0.2)
+}
+
+.container .edit {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: transparent;
+    font-weight: 500;
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+.container button span {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-right: 5px;
+}
