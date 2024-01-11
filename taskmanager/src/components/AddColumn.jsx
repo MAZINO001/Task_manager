@@ -6,7 +6,6 @@ export default function AddColumn({ onAddColumn, uniqueId }) {
   return (
     <div className={style.container}>
       <button onClick={() => onAddColumn(uniqueId)}>
-        {" "}
         <LuPlus />
         Add new column
       </button>
