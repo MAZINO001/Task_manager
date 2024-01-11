@@ -1,4 +1,3 @@
-// Container.js
 import React, { useContext, useState } from "react";
 import styles from "../styles/Container.module.css";
 import AddColumn from "./AddColumn";
@@ -53,3 +52,4 @@ export default function Container() {
     </div>
   );
 }
+ //learn more while you learnig this - learn by aking projects 

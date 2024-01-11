@@ -1,4 +1,3 @@
-// AddColumn.js
 import React from "react";
 import { LuPlus } from "react-icons/lu";
 import style from "../styles/AddColumn.module.css";
