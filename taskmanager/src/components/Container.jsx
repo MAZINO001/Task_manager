@@ -1,5 +1,6 @@
 //learn more while you learnig this - learn by making projects
 //lean how to add all od this to local storage
+//you tasks on the book - finish at leats 5 of them 
 import React, { useContext, useState } from "react";
 import styles from "../styles/Container.module.css";
 import AddColumn from "./AddColumn";
