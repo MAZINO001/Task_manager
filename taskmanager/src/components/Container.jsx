@@ -21,14 +21,17 @@ export default function Container() {
 
   const addColumn = () => {
     const uniqueId = new Date().getTime();
-    const newColumn = {
-      id: uniqueId,
-      title: `TODO ${uniqueId}`,
-      tasks: [],
-    };
-
-    setColumns((prevColumns) => [newColumn, ...prevColumns]);
+    setColumns((prevColumns) => [
+      ...prevColumns,
+      {
+        id: uniqueId,
+        title: `TODO ${uniqueId}`,
+        tasks: [],
+      },
+    ]);
   };
+  
+  
 
   const addTaskToColumn = (columnId, task) => {
     setColumns((prevColumns) =>
