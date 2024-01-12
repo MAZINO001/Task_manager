@@ -1,0 +1,36 @@
+.container {
+    margin-left: 20px;
+    margin-right: 20px;
+
+}
+
+.top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80px;
+    text-transform: capitalize;
+    margin-left: 10px;
+    letter-spacing: 2px;
+    color: #fff;
+}
+
+.top p:first-child {
+    position: relative;
+    top: 2px;
+    margin-right: 5px;
+}
+
+.top span {
+    font-size: 13px;
+    margin-left: 5px;
+}
+
+.content {
+    border: 2px solid #5a5e6d;
+    width: 300px;
+    height: 456px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+
+}

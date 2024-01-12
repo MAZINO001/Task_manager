@@ -1,0 +1,32 @@
+.container {
+    margin: 60px 10px 10px 15px;
+    width: 300px;
+    height: 85%;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to bottom, #292c2e 0%, #20212c 100%);
+
+}
+
+.container button {
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    text-transform: capitalize;
+    font-size: 25px;
+    cursor: pointer;
+    font-weight: 700;
+    color: #5a5e6d;
+
+}
+
+.container button:hover {
+    color: #322f86;
+}

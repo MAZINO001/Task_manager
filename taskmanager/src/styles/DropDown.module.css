@@ -1,0 +1,35 @@
+.StatusCon {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.container form label {
+    font-size: 16px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    float: left;
+    width: 83%;
+}
+
+.StatusCon select {
+    background-color: #2b2c37;
+    outline: 2px solid #635fc7;
+    border: none;
+    width: 400px;
+    height: 30px;
+    border-radius: 5px;
+    padding: 0 10px;
+    color: #698189;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    text-transform: capitalize;
+}
+
+.StatusCon select option:hover {
+    background-color: transparent;
+    color: #fff;
+}

@@ -1,0 +1,41 @@
+.containerOpen {
+    background-color: #20212c;
+    width: 100%;
+    height: 85vh;
+    overflow: auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    transition: 0.5s ease;
+}
+
+
+.containerClosed {
+    background-color: #20212c;
+    width: 100%;
+    height: 85vh;
+    overflow: auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-left: -300px;
+    transition: 0.5s ease;
+
+}
+
+.containerClosed::-webkit-scrollbar,
+.containerOpen::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+.containerClosed::-webkit-scrollbar-thumb,
+.containerOpen::-webkit-scrollbar-thumb {
+    width: 50px;
+    background-color: #7d8396;
+}
+
+.containerClosed::-webkit-scrollbar-track,
+.containerOpen::-webkit-scrollbar-track {
+    background-color: #2b2c37;
+}
