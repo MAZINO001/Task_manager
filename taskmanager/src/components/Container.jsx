@@ -26,6 +26,7 @@ export default function Container() {
       title: `TODO ${uniqueId}`,
       tasks: [],
     };
+    
 
     setColumns((prevColumns) => [...prevColumns, newColumn]);
   };

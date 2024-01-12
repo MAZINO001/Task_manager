@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { BsReverseLayoutTextSidebarReverse } from "react-icons/bs";
 import styles from "../styles/Board.module.css";
 import { SideBareContext } from "../context/SideBareContext";
@@ -12,22 +12,11 @@ export default function Board() {
     setClickedIndex(index === clickedIndex ? null : index);
   }
 
-  useEffect(() => {
-    const boardElement = document.getElementById(`board-${index}`);
-    if (boardElement) {
-      if (clickedIndex === index) {
-        boardElement.classList.add("active");
-      } else {
-        boardElement.classList.remove("active");
-      }
-    }
-  }, [clickedIndex, index]);
-
   return (
     <div
       id={`board-${index}`}
       className={`${styles.board} ${
-        clickedIndex === index ? styles.clickedBoard : ""
+        clickedIndex === index ? styles.clickedBoard : styles.board
       }`}
       onClick={handleClick}
     >
