@@ -20,7 +20,6 @@ export default function AddBoard() {
 
   function handleNameChange(e) {
     setName(e.target.value);
-    
   }
 
   function handleColumnChange(e) {
