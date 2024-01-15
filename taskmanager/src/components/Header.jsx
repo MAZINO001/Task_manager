@@ -38,10 +38,15 @@ export default function Header({ boardModalOpen, setboardModalOpen }) {
           <img src={elipsis} alt="elipsis" className=" cursor-pointer h-6" />
         </div>
       </header>
-      {openDropDown && <HeaderDropDown  setboardModalOpen={setboardModalOpen} setopenDropDown={setopenDropDown} />}
-      {
-        boardModalOpen && <AddEditBoardModal  setboardModalOpen={setboardModalOpen} />
-      }
+      {openDropDown && (
+        <HeaderDropDown
+          setboardModalOpen={setboardModalOpen}
+          setopenDropDown={setopenDropDown}
+        />
+      )}
+      {boardModalOpen && (
+        <AddEditBoardModal setboardModalOpen={setboardModalOpen} />
+      )}
     </div>
   );
 }
