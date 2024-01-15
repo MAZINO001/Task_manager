@@ -1,13 +1,12 @@
 import React from "react";
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 export default function AddEditBoardModal({ setboardModalOpen, type }) {
   const [name, setName] = useState("");
-  const [newColumn, setNewColumn] = useState(
-    [
-        {name : 'Todo' , task : [] , id : ''},
-        {name : 'Todo' , task : [] , id : ''}
-    ]
-  );
+  const [newColumn, setNewColumn] = useState([
+    { name: "Todo", task: [], id: uuidv4() },
+    { name: "Todo", task: [], id: uuidv4() },
+  ]);
   return (
     <div
       className="fixed right-0 left-0 bottom-0 top-0 px-2 scrollbar-hide py-4 overflow-scroll z-50 justify-center items-center flex bg-[#00000080]"
