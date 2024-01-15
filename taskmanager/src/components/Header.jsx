@@ -3,7 +3,7 @@ import { useState } from "react";
 import iconUp from "../Assets/icon-chevron-up.svg";
 import iconDown from "../Assets/icon-chevron-down.svg";
 import elipsis from "../Assets/icon-vertical-ellipsis.svg";
-
+import HeaderDropDown from "./HeaderDropDown";
 export default function Header() {
   const [openDropDown, setopenDropDown] = useState(false);
 
@@ -32,11 +32,12 @@ export default function Header() {
 
         {/* right side */}
         <div className="flex space-x-4 items-center md:space-x-6">
-          <button className="button">+ Add New Task</button>
+          <button className="button hidden md:block">+ Add New Task</button>
           <button className="button py-1 px-3 md:hidden">+</button>
           <img src={elipsis} alt="elipsis" className=" cursor-pointer h-6" />
         </div>
       </header>
+      {openDropDown && <HeaderDropDown setopenDropDown={setopenDropDown} />}
     </div>
   );
 }
