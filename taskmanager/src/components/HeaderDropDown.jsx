@@ -45,7 +45,7 @@ export default function HeaderDropDown({ setopenDropDown, setboardModalOpen }) {
             </div>
           ))}
           <div
-            className="flex items-center space-x-2 text-[#635fc7] px-5 py-4"
+            className=" cursor-pointer  flex items-center space-x-2 text-[#635fc7] px-5 py-4"
             onClick={() => {
               setboardModalOpen(true);
               setopenDropDown(false);

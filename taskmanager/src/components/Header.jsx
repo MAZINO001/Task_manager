@@ -40,7 +40,7 @@ export default function Header({ boardModalOpen, setboardModalOpen }) {
       </header>
       {openDropDown && <HeaderDropDown  setboardModalOpen={setboardModalOpen} setopenDropDown={setopenDropDown} />}
       {
-        boardModalOpen && <AddEditBoardModal/>
+        boardModalOpen && <AddEditBoardModal  setboardModalOpen={setboardModalOpen} />
       }
     </div>
   );
