@@ -6,9 +6,10 @@ import elipsis from "../Assets/icon-vertical-ellipsis.svg";
 import HeaderDropDown from "./HeaderDropDown";
 import AddEditBoardModal from "../Modals/AddEditBoardModal";
 import { useDispatch, useSelector } from "react-redux";
-
+import AddEditTastModal from "../Modals/AddEditTastModal";
 export default function Header({ boardModalOpen, setboardModalOpen }) {
   const dispatch = useDispatch();
+  const [OpenEditTask, setOpenEditTask] = useState(false);
   const [openDropDown, setopenDropDown] = useState(false);
   const [boardType, setBoardType] = useState("add");
   const boards = useSelector((state) => state.boards);
@@ -39,7 +40,14 @@ export default function Header({ boardModalOpen, setboardModalOpen }) {
         {/* right side */}
         <div className="flex space-x-4 items-center md:space-x-6">
           <button className="button hidden md:block">+ Add New Task</button>
-          <button className="button py-1 px-3 md:hidden">+</button>
+          <button
+            className="button py-1 px-3 md:hidden"
+            onClick={() => {
+              setOpenEditTask((state) => !state);
+            }}
+          >
+            +
+          </button>
           <img src={elipsis} alt="elipsis" className=" cursor-pointer h-6" />
         </div>
       </header>
@@ -54,6 +62,9 @@ export default function Header({ boardModalOpen, setboardModalOpen }) {
           type={boardType}
           setboardModalOpen={setboardModalOpen}
         />
+      )}
+      {OpenEditTask && (
+        <AddEditTastModal device="mobile" setOpenEditTask={setOpenEditTask} />
       )}
     </div>
   );
