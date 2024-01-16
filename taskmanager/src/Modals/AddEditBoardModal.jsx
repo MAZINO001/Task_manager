@@ -11,7 +11,7 @@ export default function AddEditBoardModal({ setboardModalOpen, type }) {
     { name: "Doing", task: [], id: uuidv4() },
   ]);
   const [isValid, setisValid] = useState(true);
-  const displatch = useDispatch();
+  const dispatch = useDispatch();
   const onChange = (id, newValue) => {
     setNewColumns((pervState) => {
       const newState = [...pervState];
@@ -40,9 +40,9 @@ export default function AddEditBoardModal({ setboardModalOpen, type }) {
   const onSubmit = () => {
     setboardModalOpen(false);
     if (type === "add") {
-      displatch(boardSlice.actions.addBoard({ name, newColumns }));
+      dispatch(boardSlice.actions.addBoard({ name, newColumns }));
     } else {
-      displatch(boardSlice.actions.editBoard({ name, newColumns }));
+      dispatch(boardSlice.actions.editBoard({ name, newColumns }));
     }
   };
   return (
