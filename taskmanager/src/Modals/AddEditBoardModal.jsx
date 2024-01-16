@@ -1,14 +1,17 @@
 import React from "react";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import cancel from "../Assets/icon-cross.svg";
+import cancelIcon from "../Assets/icon-cross.svg";
+import { useDispatch } from "react-redux";
+import boardSlice from "../Redux/boardsSlice";
 export default function AddEditBoardModal({ setboardModalOpen, type }) {
   const [name, setName] = useState("");
   const [newColumns, setNewColumns] = useState([
     { name: "Todo", task: [], id: uuidv4() },
     { name: "Doing", task: [], id: uuidv4() },
   ]);
-
+  const [isValid, setisValid] = useState(true);
+  const displatch = useDispatch();
   const onChange = (id, newValue) => {
     setNewColumns((pervState) => {
       const newState = [...pervState];
@@ -16,6 +19,31 @@ export default function AddEditBoardModal({ setboardModalOpen, type }) {
       column.name = newValue;
       return newState;
     });
+  };
+
+  const onDelete = (id) => {
+    setNewColumns((pervState) => pervState.filter((el) => el.id !== id));
+  };
+  const validate = () => {
+    setisValid(false);
+    if (!name.trim()) {
+      return false;
+    }
+    for (let i = 0; i < newColumns.length; i++) {
+      if (!newColumns[i].name.trim()) {
+        return false;
+      }
+    }
+    setisValid(true);
+    return true;
+  };
+  const onSubmit = () => {
+    setboardModalOpen(false);
+    if (type === "add") {
+      displatch(boardSlice.actions.addBoard({ name, newColumns }));
+    } else {
+      displatch(boardSlice.actions.editBoard({ name, newColumns }));
+    }
   };
   return (
     <div
@@ -53,22 +81,51 @@ export default function AddEditBoardModal({ setboardModalOpen, type }) {
         </div>
         {/* board columns */}
         <div className="mt-8 flex flex-col space-y-3 ">
-          <label className="text-sm dar:text-white text-gray-500">
+          <label className="text-sm dark:text-white text-gray-500">
             Board Columns
           </label>
           {newColumns.map((column, index) => (
             <div className="flex items-center w-full" key={index}>
               <input
-                className="bg-transparent flex-grow px-4 py-2 rounded-md text-sm border border-gray-600 outline-none focus:outline-[#735fc7]"
+                className="bg-transparent flex-grow px-4 py-2 rounded-md text-sm border border-gray-600 outline-none focus:outline-[#735fc7] "
                 onChange={(e) => {
                   onChange(column.id, e.target.value);
                 }}
                 type="text"
                 value={column.name}
               />
-              <img src={cancel} alt="" className="ml-2 w-5" />
+              <img
+                src={cancelIcon}
+                alt=""
+                className=" cursor-pointer m-4"
+                onClick={() => {
+                  onDelete(column.id);
+                }}
+              />
             </div>
           ))}
+        </div>
+        <div>
+          <button
+            className="w-full items-center hover:opacity-75 dark:text-[#635fc7] dark:bg-white text-white bg-[#635fc7] py-2 rounded-full mt-2"
+            onClick={() => {
+              setNewColumns((state) => [
+                ...state,
+                { name: "", task: [], id: uuidv4() },
+              ]);
+            }}
+          >
+            + Add New Column
+          </button>
+          <button
+            className="w-full items-center hover:opacity-75 dark:text-white dark:bg-[#635fc7] mt-8 relative text-white bg-[#635fc7] py-2 rounded-full"
+            onClick={() => {
+              const isValid = validate();
+              if (isValid === true) onSubmit(type);
+            }}
+          >
+            {type === "add" ? "Creat New Board" : " Save Changes"}
+          </button>
         </div>
       </div>
     </div>
