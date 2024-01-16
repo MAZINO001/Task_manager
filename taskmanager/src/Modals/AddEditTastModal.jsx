@@ -1,33 +1,86 @@
 import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { v4 as uuidv4, validate } from "uuid";
 import cancelIcon from "../Assets/icon-cross.svg";
-import { useSelector } from "react-redux";
-export default function AddEditTaskModal({ type, device, setOpenEditTask }) {
+import { useDispatch, useSelector } from "react-redux";
+import boardSlice from "../Redux/boardsSlice";
+export default function AddEditTaskModal({
+  type,
+  device,
+  setOpenEditTask,
+  pervColIndex = 0,
+}) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [isValid, setisValid] = useState(true);
+  const dispatch = useDispatch();
 
-  const board = useSelector((state) => state.board).find(
+  const board = useSelector((state) => state.boards).find(
     (board) => board.isActive
   );
   const columns = board.columns;
+  const col = columns.find((col, index) => index === pervColIndex);
+  const [status, setStatus] = useState(columns[pervColIndex].name);
+  const [newColIndex, setNewColIndex] = useState(pervColIndex);
   const [subTasks, setSubTasks] = useState([
     { title: "", isComplete: false, id: uuidv4() },
     { title: "", isComplete: false, id: uuidv4() },
   ]);
 
-  const onChange = (id, newValue) => {
-    setSubTasks((pervState) => {
-      const newState = [...pervState];
-      const subtask = newState.find((subtask) => subtask.id === id);
-      subtask.title = newValue;
-      return newState;
-    });
-  };
+ const onChange = (id, newValue) => {
+  setSubTasks((prevState) => {
+    const newState = prevState.map((subtask) =>
+      subtask.id === id ? { ...subtask, title: newValue } : subtask
+    );
+    return newState;
+  });
+};
 
   const onDelete = (id) => {
     setSubTasks((perstate) => perstate.filter((el) => el.id !== id));
   };
-
+  const validate = () => {
+    setisValid(false);
+    if (!title.trim()) {
+      return false;
+    }
+    for (let i = 0; i < subTasks.length; i++) {
+      if (!subTasks[i].title.trim()) {
+        return false;
+      }
+    }
+    setisValid(true);
+    return true;
+  };
+  const onSubmit = () => {
+    setboardModalOpen(false);
+    if (type === "add") {
+      dispatch(
+        boardSlice.actions.addTask({
+          title,
+          description,
+          subTasks,
+          status,
+          newColIndex,
+        })
+      );
+    } else {
+      dispatch(
+        boardSlice.actions.editTask({
+          title,
+          description,
+          subTasks,
+          status,
+          taskIndex,
+          pervColIndex,
+          newColIndex,
+        })
+      );
+    }
+  };
+  const onChnageStatus = (e) => {
+    setStatus(e.target.value);
+    setNewColIndex(e.target.selectedIndex);
+  };
   return (
     <div
       onClick={(e) => {
@@ -82,7 +135,7 @@ export default function AddEditTaskModal({ type, device, setOpenEditTask }) {
         </div>
         {/* subtasks section */}
         <div className=" mt-8 flex flex-col space-y-1 ">
-          <label className="text-sm dark:text-white text-gray-500">
+          <label className="text-sm dark:text-white  text-gray-500">
             SubTasks
           </label>
           {subTasks.map((subtask, index) => {
@@ -116,7 +169,7 @@ export default function AddEditTaskModal({ type, device, setOpenEditTask }) {
                 { title: "", isComplete: false, id: uuidv4() },
               ]);
             }}
-            className="w-full items-center dark:text-[#635fc7] dark:bg-white text-xhite bg-[#635fc7] py-2 rounded-full"
+            className="w-full items-center dark:text-[#635fc7] dark:bg-white text-white bg-[#635fc7] py-2 rounded-full"
           >
             + Add New Subtask
           </button>
@@ -127,13 +180,29 @@ export default function AddEditTaskModal({ type, device, setOpenEditTask }) {
           <label className="text-sm dark:text-white text-gray-500">
             Current status
           </label>
-          <select className="select-status flex flex-grow px4 py-2 rounded-md text-sm bg-transparent focus:border-0 border border-gray-300 focus:outline-[#635fc7] outline-none">
-            {columns.map((column, index) => {
+          <select
+            value={status}
+            onChange={(e) => onChnageStatus(e)}
+            className="select-status flex flex-grow px-4 py-2 rounded-md text-sm bg-transparent focus:border-0 border border-gray-300 focus:outline-[#635fc7] outline-none"
+          >
+            {columns.map((column, index) => (
               <option value={column.name} key={index}>
                 {column.name}
-              </option>;
-            })}
+              </option>
+            ))}
           </select>
+          <button
+            onClick={() => {
+              const isValid = validate();
+              if (isValid) {
+                onSubmit(type);
+                setOpenEditTask(false);
+              }
+            }}
+            className="w-full items-center text-white bg-[#635fc7] py-2 rounded-full"
+          >
+            {type === "edit" ? "Save edit" : "Creat Task"}
+          </button>
         </div>
       </div>
     </div>

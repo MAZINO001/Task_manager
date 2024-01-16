@@ -64,7 +64,7 @@ export default function Header({ boardModalOpen, setboardModalOpen }) {
         />
       )}
       {OpenEditTask && (
-        <AddEditTastModal device="mobile" setOpenEditTask={setOpenEditTask} />
+        <AddEditTastModal device="mobile" type='add' setOpenEditTask={setOpenEditTask} />
       )}
     </div>
   );
