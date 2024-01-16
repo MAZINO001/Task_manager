@@ -7,6 +7,7 @@ export default function AddEditTaskModal({
   type,
   device,
   setOpenEditTask,
+  taskIndex,
   pervColIndex = 0,
 }) {
   const [title, setTitle] = useState("");
@@ -26,14 +27,14 @@ export default function AddEditTaskModal({
     { title: "", isComplete: false, id: uuidv4() },
   ]);
 
- const onChange = (id, newValue) => {
-  setSubTasks((prevState) => {
-    const newState = prevState.map((subtask) =>
-      subtask.id === id ? { ...subtask, title: newValue } : subtask
-    );
-    return newState;
-  });
-};
+  const onChange = (id, newValue) => {
+    setSubTasks((prevState) => {
+      const newState = prevState.map((subtask) =>
+        subtask.id === id ? { ...subtask, title: newValue } : subtask
+      );
+      return newState;
+    });
+  };
 
   const onDelete = (id) => {
     setSubTasks((perstate) => perstate.filter((el) => el.id !== id));
@@ -51,8 +52,8 @@ export default function AddEditTaskModal({
     setisValid(true);
     return true;
   };
-  const onSubmit = () => {
-    setboardModalOpen(false);
+  const onSubmit = (type) => {
+    // setboardModalOpen(false);
     if (type === "add") {
       dispatch(
         boardSlice.actions.addTask({
