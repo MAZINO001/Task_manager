@@ -8,14 +8,38 @@ import AddEditBoardModal from "../Modals/AddEditBoardModal";
 import { useDispatch, useSelector } from "react-redux";
 import AddEditTastModal from "../Modals/AddEditTastModal";
 import ElipsesMenu from "./ElipsesMenu";
+import DeleteModal from "../Modals/DeleteModal";
+import boardsSlice from "../Redux/boardsSlice";
+
 export default function Header({ boardModalOpen, setboardModalOpen }) {
   const dispatch = useDispatch();
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [OpenEditTask, setOpenEditTask] = useState(false);
   const [openDropDown, setopenDropDown] = useState(false);
   const [IsElipsisOpen, setIsElipsisOpen] = useState(false);
+
   const [boardType, setBoardType] = useState("add");
   const boards = useSelector((state) => state.boards);
   const board = boards.find((board) => board.isActive);
+
+  const setOpenEditModal = () => {
+    setboardModalOpen(true);
+    setIsElipsisOpen(false);
+  };
+  const setOpenDeleteModal = () => {
+    setIsDeleteModalOpen(true);
+    setIsElipsisOpen(false);
+  };
+  const onDeleteBtnClick = () => {
+    dispatch(boardsSlice.actions.deleteBoard());
+    dispatch(boardsSlice.actions.setBoardActive({ index: 0 }));
+    setIsDeleteModalOpen(false);
+  };
+  const onDropDownClick = () => {
+    setopenDropDown((state) => !state);
+    setIsElipsisOpen(false);
+    setBoardType("add");
+  };
   return (
     <div className=" p-4 fixed left-0 bg-white dark:bg-[#2b2c37] z-50 right-0">
       <header className="flex justify-between dark:text-white items-center">
@@ -34,14 +58,21 @@ export default function Header({ boardModalOpen, setboardModalOpen }) {
               src={openDropDown ? iconUp : iconDown}
               alt="dropdown icon"
               className="w-3 ml-2 md:hidden cursor-pointer"
-              onClick={() => setopenDropDown(!openDropDown)}
+              onClick={onDropDownClick}
             />
           </div>
         </div>
 
         {/* right side */}
         <div className="flex space-x-4 items-center md:space-x-6">
-          <button className="button hidden md:block">+ Add New Task</button>
+          <button
+            className="button hidden md:block"
+            onClick={() => {
+              setOpenEditTask((state) => !state);
+            }}
+          >
+            + Add New Task
+          </button>
           <button
             className="button py-1 px-3 md:hidden"
             onClick={() => {
@@ -50,8 +81,23 @@ export default function Header({ boardModalOpen, setboardModalOpen }) {
           >
             +
           </button>
-          <img src={elipsis} alt="elipsis" className=" cursor-pointer h-6" />
-          {IsElipsisOpen && <ElipsesMenu type="Boards" />}
+          <img
+            src={elipsis}
+            alt="elipsis"
+            onClick={() => {
+              setBoardType("edit");
+              setopenDropDown(false);
+              setIsElipsisOpen((state) => !state);
+            }}
+            className=" cursor-pointer h-6"
+          />
+          {IsElipsisOpen && (
+            <ElipsesMenu
+              type="Boards"
+              setOpenDeleteModal={setOpenDeleteModal}
+              setOpenEditModal={setOpenEditModal}
+            />
+          )}
         </div>
       </header>
       {openDropDown && (
@@ -71,6 +117,14 @@ export default function Header({ boardModalOpen, setboardModalOpen }) {
           device="mobile"
           type="add"
           setOpenEditTask={setOpenEditTask}
+        />
+      )}
+      {isDeleteModalOpen && (
+        <DeleteModal
+          onDeleteBtnClick={onDeleteBtnClick}
+          setIsDeleteModalOpen={setIsDeleteModalOpen}
+          title={board.name}
+          type="board"
         />
       )}
     </div>
