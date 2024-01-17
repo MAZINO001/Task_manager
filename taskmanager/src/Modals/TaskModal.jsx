@@ -15,8 +15,10 @@ export default function TaskModal({ colIndex, taskIndex, setIsTaskModalOpen }) {
     }
   });
   const [status, setstatus] = useState(task.status)
-  
+  const [newColIndex, setnewColIndex] = useState(columns.indexOf(col))
 
 
-  return <div>TaskModal</div>;
+  return <div
+  className=""
+  ></div>;
 }
