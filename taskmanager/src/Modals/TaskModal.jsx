@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function TaskModal({ colIndex, taskIndex, setIsTaskModalOpen }) {
   const boards = useSelector((state) => state.boards);
@@ -14,7 +14,9 @@ export default function TaskModal({ colIndex, taskIndex, setIsTaskModalOpen }) {
       completed++;
     }
   });
-  const [status, setstatus] = useState(second)
+  const [status, setstatus] = useState(task.status)
+  
+
 
   return <div>TaskModal</div>;
 }

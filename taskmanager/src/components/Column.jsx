@@ -21,7 +21,7 @@ export default function Column({ colIndex }) {
   const boards = useSelector((state) => state.boards);
   const board = boards.find((board) => board.isActive);
   const col = board.columns.find((col, i) => i === colIndex);
-
+//somthign here 
   useEffect(() => {
     setColor(shuffle(colors).pop());
   }, [dispatch]);

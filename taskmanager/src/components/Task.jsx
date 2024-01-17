@@ -9,7 +9,7 @@ export default function Task({ taskIndex, colIndex }) {
   const col = board.columns.find((col, i) => i === colIndex);
   const task = col.tasks.find((task, i) => i === taskIndex);
 
-  const [isTaskModalOpen, setIsTaskModalOpen] = useState(false); // Corrected the function name
+  const [isTaskModalOpen, setIsTaskModalOpen] = useState(false); 
   let completed = 0;
   let subtasks = task.subtasks;
   subtasks.forEach((subtask) => {
