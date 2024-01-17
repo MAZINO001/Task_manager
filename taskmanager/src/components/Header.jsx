@@ -7,10 +7,12 @@ import HeaderDropDown from "./HeaderDropDown";
 import AddEditBoardModal from "../Modals/AddEditBoardModal";
 import { useDispatch, useSelector } from "react-redux";
 import AddEditTastModal from "../Modals/AddEditTastModal";
+import ElipsesMenu from "./ElipsesMenu";
 export default function Header({ boardModalOpen, setboardModalOpen }) {
   const dispatch = useDispatch();
   const [OpenEditTask, setOpenEditTask] = useState(false);
   const [openDropDown, setopenDropDown] = useState(false);
+  const [IsElipsisOpen, setIsElipsisOpen] = useState(false);
   const [boardType, setBoardType] = useState("add");
   const boards = useSelector((state) => state.boards);
   const board = boards.find((board) => board.isActive);
@@ -49,6 +51,7 @@ export default function Header({ boardModalOpen, setboardModalOpen }) {
             +
           </button>
           <img src={elipsis} alt="elipsis" className=" cursor-pointer h-6" />
+          {IsElipsisOpen && <ElipsesMenu type="Boards" />}
         </div>
       </header>
       {openDropDown && (
@@ -64,7 +67,11 @@ export default function Header({ boardModalOpen, setboardModalOpen }) {
         />
       )}
       {OpenEditTask && (
-        <AddEditTastModal device="mobile" type='add' setOpenEditTask={setOpenEditTask} />
+        <AddEditTastModal
+          device="mobile"
+          type="add"
+          setOpenEditTask={setOpenEditTask}
+        />
       )}
     </div>
   );

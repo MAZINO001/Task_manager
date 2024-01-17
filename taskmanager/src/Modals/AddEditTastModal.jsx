@@ -139,29 +139,28 @@ export default function AddEditTaskModal({
           <label className="text-sm dark:text-white  text-gray-500">
             SubTasks
           </label>
-          {subTasks.map((subtask, index) => {
-            return (
-              <div key={index} className="flex items-center w-full">
-                <input
-                  type="text"
-                  onChange={(e) => {
-                    onChange(subTasks.id, e.target.value);
-                  }}
-                  value={subTasks.title}
-                  className="bg-transparent outline-none focus:border-0  border flex-grow px-4 py-2 rounded-md text-sm border-gray-500  focus:outline-[#635fc7]"
-                  placeholder="e.g Take coffee break "
-                />
-                <img
-                  src={cancelIcon}
-                  alt=""
-                  onClick={() => {
-                    onDelete(subtask.id);
-                  }}
-                  className="m-4 cursor-pointer"
-                />
-              </div>
-            );
-          })}
+{subTasks.map((subtask, index) => {
+  return (
+    <div key={index} className="flex items-center w-full">
+      <input
+        type="text"
+        onChange={(e) => onChange(subtask.id, e.target.value)}
+        value={subtask.title}
+        className="bg-transparent outline-none focus:border-0 border flex-grow px-4 py-2 rounded-md text-sm border-gray-500  focus:outline-[#635fc7]"
+        placeholder="e.g Take coffee break "
+      />
+      <img
+        src={cancelIcon}
+        alt=""
+        onClick={() => {
+          onDelete(subtask.id);
+        }}
+        className="m-4 cursor-pointer"
+      />
+    </div>
+  );
+})}
+
 
           <button
             onClick={() => {
