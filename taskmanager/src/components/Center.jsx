@@ -1,4 +1,7 @@
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import Column from "./Column";
+import SideBar from "./SideBar"; // Assuming you have a SideBar component
 
 export default function Center({ boardModalOpen, setboardModalOpen }) {
   const [isSideBarOpen, setisSideBarOpen] = useState(true);
@@ -7,16 +10,20 @@ export default function Center({ boardModalOpen, setboardModalOpen }) {
     window.innerHeight,
   ]);
 
+  const boards = useSelector((state) => state.boards);
+  const board = boards.find((board) => board.isActive === true);
+  const columns = board.columns;
+
   useEffect(() => {
-    const HnadleWindowResize = () => {
+    const handleWindowResize = () => {
       setWindowSize([window.innerWidth, window.innerHeight]);
     };
-    window.addEventListener("resize", HnadleWindowResize);
+    window.addEventListener("resize", handleWindowResize);
 
     return () => {
-      window.removeEventListener("resize", HnadleWindowResize);
+      window.removeEventListener("resize", handleWindowResize);
     };
-  });
+  }, []);
 
   return (
     <div
@@ -26,7 +33,11 @@ export default function Center({ boardModalOpen, setboardModalOpen }) {
           : "bg-[#f4f7fd] scrollbar-hide h-screen flex dark:bg-[#20212c] overflow-x-scroll gap-6 "
       }
     >
-      {WindowSize[0] >= 768 && (<SideBar/>)}
+      {WindowSize[0] >= 768 && <SideBar />}
+      {/* columns Section */}
+      {columns.map((col, index) => (
+        <Column key={index} colIndex={index} />
+      ))}
     </div>
   );
 }
