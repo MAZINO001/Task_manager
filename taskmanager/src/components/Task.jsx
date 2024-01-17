@@ -19,7 +19,7 @@ export default function Task({ taskIndex, colIndex }) {
   });
 
   return (
-    // first:my-5 to put in secod div later 
+    // first:my-5 to put in second div later 
 
     <div>
       <div

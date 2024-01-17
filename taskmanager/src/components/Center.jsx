@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Column from "./Column";
-import SideBar from "./SideBar"; // Assuming you have a SideBar component
+import SideBar from "./SideBar"; t
 
 export default function Center({ boardModalOpen, setboardModalOpen }) {
   const [isSideBarOpen, setisSideBarOpen] = useState(true);

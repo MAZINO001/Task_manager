@@ -31,7 +31,6 @@ function App() {
       <EmptyBoard type="add"/>
       </>
     }
-    
       </>
     </div>
   );
