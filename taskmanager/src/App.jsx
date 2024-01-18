@@ -1,36 +1,36 @@
-import Header from "./components/Header";
-import Center from "./components/Center";
-import EmptyBoard from "./components/EmptyBoard";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Header from "./components/Header";
+import Home from "./components/Center";
+import EmptyBoard from "./components/EmptyBoard";
 import boardsSlice from "./Redux/boardsSlice";
+
 function App() {
+  const [isBoardModalOpen, setIsBoardModalOpen] = useState(false);
   const dispatch = useDispatch();
   const boards = useSelector((state) => state.boards);
-  const ActiveBoard = boards.find((board) => board.isActive);
-
-  if (!ActiveBoard && boards.length > 0) {
+  const activeBoard = boards.find((board) => board.isActive);
+  if (!activeBoard && boards.length > 0)
     dispatch(boardsSlice.actions.setBoardActive({ index: 0 }));
-  }
-  const [boardModalOpen, setboardModalOpen] = useState(false);
   return (
-    <div className="App overflow-hidden overflow-x-scroll">
+    <div className=" overflow-hidden  overflow-x-scroll">
       <>
-      {boards.length > 0 ? 
-      <>
-        {/* header  section */}
-        <Header
-          boardModalOpen={boardModalOpen}
-          setboardModalOpen={setboardModalOpen}
-        />
-        {/* center section */}
-        <Center        boardModalOpen={boardModalOpen}
-          setboardModalOpen={setboardModalOpen}/>  
-      </>  :
-      <>
-      <EmptyBoard type="add"/>
-      </>
-    }
+        {boards.length > 0 ? (
+          <>
+            <Header
+              setIsBoardModalOpen={setIsBoardModalOpen}
+              isBoardModalOpen={isBoardModalOpen}
+            />
+            <Home
+              setIsBoardModalOpen={setIsBoardModalOpen}
+              isBoardModalOpen={isBoardModalOpen}
+            />
+          </>
+        ) : (
+          <>
+            <EmptyBoard type="add" />
+          </>
+        )}
       </>
     </div>
   );
