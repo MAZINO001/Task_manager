@@ -23,14 +23,15 @@ export default function TaskModal({ colIndex, taskIndex, setIsTaskModalOpen }) {
   const [status, setStatus] = useState(task.status);
   const [newColIndex, setnewColIndex] = useState(columns.indexOf(col));
   const [elipsisMenuOpen, setelipsisMenuOpen] = useState(false);
-  const [isDeleteModalOpen, setisDeleteModalOpen] = useState(false);
-  const [isAddTaskModalOpen, setisAddTaskModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isAddTaskModalOpen, setIsAddTaskModalOpen] = useState(false);
+
   const setOpenEditModal = () => {
-    setisAddTaskModalOpen(true);
+    setIsAddTaskModalOpen(true);
     setelipsisMenuOpen(false);
   };
   const setOpenDeleteModal = () => {
-    setisAddTaskModalOpen(false);
+    setIsAddTaskModalOpen(false);
     setelipsisMenuOpen(true);
   };
 
@@ -53,9 +54,9 @@ export default function TaskModal({ colIndex, taskIndex, setIsTaskModalOpen }) {
     setIsTaskModalOpen(false);
   };
   const onDeleteBtnClick = () => {
-    dispatch(boardsSlice.actions.deleteBoard({ taskIndex, colIndex }));
+    dispatch(boardsSlice.actions.deleteTask({ taskIndex, colIndex }));
     setIsTaskModalOpen(false);
-    setisDeleteModalOpen(false);
+    setIsDeleteModalOpen(false);
   };
   return (
     <div
@@ -121,7 +122,7 @@ export default function TaskModal({ colIndex, taskIndex, setIsTaskModalOpen }) {
       </div>
       {isDeleteModalOpen && (
         <DeletModal
-          setIsDeleteModalOpen={setisDeleteModalOpen}
+          setIsDeleteModalOpen={setIsDeleteModalOpen}
           onDeleteBtnClick={onDeleteBtnClick}
           title={task.title}
           type="task"
