@@ -4,6 +4,7 @@ import elepsis from "../Assets/icon-vertical-ellipsis.svg";
 import ElipsesMenu from "../components/ElipsesMenu";
 import Subtask from "../components/Subtask";
 import boardsSlice from "../Redux/boardsSlice";
+import DeletModal from "../Modals/DeleteModal";
 export default function TaskModal({ colIndex, taskIndex, setIsTaskModalOpen }) {
   const dispatch = useDispatch();
   const boards = useSelector((state) => state.boards);
@@ -23,12 +24,14 @@ export default function TaskModal({ colIndex, taskIndex, setIsTaskModalOpen }) {
   const [newColIndex, setnewColIndex] = useState(columns.indexOf(col));
   const [elipsisMenuOpen, setelipsisMenuOpen] = useState(false);
   const [isDeleteModalOpen, setisDeleteModalOpen] = useState(false);
-
+  const [isAddTaskModalOpen, setisAddTaskModalOpen] = useState(false);
   const setOpenEditModal = () => {
-    //later
+    setisAddTaskModalOpen(true);
+    setelipsisMenuOpen(false);
   };
   const setOpenDeleteModal = () => {
-    //later
+    setisAddTaskModalOpen(false);
+    setelipsisMenuOpen(true);
   };
 
   const onChange = (e) => {
@@ -49,7 +52,11 @@ export default function TaskModal({ colIndex, taskIndex, setIsTaskModalOpen }) {
     );
     setIsTaskModalOpen(false);
   };
-
+  const onDeleteBtnClick = () => {
+    dispatch(boardsSlice.actions.deleteBoard({ taskIndex, colIndex }));
+    setIsTaskModalOpen(false);
+    setisDeleteModalOpen(false);
+  };
   return (
     <div
       onClick={onClose}
@@ -112,6 +119,14 @@ export default function TaskModal({ colIndex, taskIndex, setIsTaskModalOpen }) {
           </select>
         </div>
       </div>
+      {isDeleteModalOpen && (
+        <DeletModal
+          setIsDeleteModalOpen={setisDeleteModalOpen}
+          onDeleteBtnClick={onDeleteBtnClick}
+          title={task.title}
+          type="task"
+        />
+      )}
     </div>
   );
 }
