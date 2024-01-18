@@ -5,6 +5,7 @@ import ElipsesMenu from "../components/ElipsesMenu";
 import Subtask from "../components/Subtask";
 import boardsSlice from "../Redux/boardsSlice";
 import DeletModal from "../Modals/DeleteModal";
+import AddEditTaskModal from "../Modals/AddEditTastModal";
 export default function TaskModal({ colIndex, taskIndex, setIsTaskModalOpen }) {
   const dispatch = useDispatch();
   const boards = useSelector((state) => state.boards);
@@ -126,6 +127,17 @@ export default function TaskModal({ colIndex, taskIndex, setIsTaskModalOpen }) {
           onDeleteBtnClick={onDeleteBtnClick}
           title={task.title}
           type="task"
+        />
+      )}
+      {setIsTaskModalOpen && (
+        <AddEditTaskModal
+          setOpenAddEditTask={setIsAddTaskModalOpen}
+          // setOpenEditTask={setIsAddTaskModalOpen}
+          onDeleteBtnClick={onDeleteBtnClick}
+          taskIndex={taskIndex}
+          type="edit"
+          pervColIndex={colIndex}
+          setIsTaskModalOpen={setIsTaskModalOpen}
         />
       )}
     </div>
