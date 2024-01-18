@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import elepsis from "../Assets/icon-vertical-ellipsis.svg";
 import ElipsesMenu from "../components/ElipsesMenu";
 import Subtask from "../components/Subtask";
+import boardsSlice from "../Redux/boardsSlice";
 export default function TaskModal({ colIndex, taskIndex, setIsTaskModalOpen }) {
   const dispatch = useDispatch();
   const boards = useSelector((state) => state.boards);
@@ -21,6 +22,7 @@ export default function TaskModal({ colIndex, taskIndex, setIsTaskModalOpen }) {
   const [status, setStatus] = useState(task.status);
   const [newColIndex, setnewColIndex] = useState(columns.indexOf(col));
   const [elipsisMenuOpen, setelipsisMenuOpen] = useState(false);
+  const [isDeleteModalOpen, setisDeleteModalOpen] = useState(false);
 
   const setOpenEditModal = () => {
     //later
@@ -33,8 +35,26 @@ export default function TaskModal({ colIndex, taskIndex, setIsTaskModalOpen }) {
     setStatus(e.target.value);
     setnewColIndex(e.target.selectIndex);
   };
+  const onClose = (e) => {
+    if (e.target !== e.currentTarget) {
+      return;
+    }
+    dispatch(
+      boardsSlice.actions.setTaskStatus({
+        taskIndex,
+        colIndex,
+        newColIndex,
+        status,
+      })
+    );
+    setIsTaskModalOpen(false);
+  };
+
   return (
-    <div className="fixed right-0 left-0 top-0 px-2 py-4 overflow-scroll scrollbar-hide z-50 bottom-0 justify-center items-center flex bg-[#00000080]">
+    <div
+      onClick={onClose}
+      className="fixed right-0 left-0 top-0 px-2 py-4 overflow-scroll scrollbar-hide z-50 bottom-0 justify-center items-center flex bg-[#00000080]"
+    >
       <div className="scrollbar-hide  overflow-y-scroll max-h-[95vh] my-auto bg-white dark:bg-[#2b2c37] text-black dark:text-white font-bold shadow-md shadow-[#364e7e1a] max-w-md mx-auto w-full px-8 py-8 rounded-xl ">
         {/* modal section  */}
         <div className="relative flex justify-between w-full items-center">
@@ -84,9 +104,11 @@ export default function TaskModal({ colIndex, taskIndex, setIsTaskModalOpen }) {
             value={status}
             onChange={onChange}
           >
-            {columns.map((column, i) => {
-              <option className="status-option">{column.name}</option>;
-            })}
+            {columns.map((column, i) => (
+              <option className="status-option" key={i}>
+                {column.name}
+              </option>
+            ))}
           </select>
         </div>
       </div>
