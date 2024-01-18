@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import elepsis from "../Assets/icon-vertical-ellipsis.svg";
 import ElipsesMenu from "../components/ElipsesMenu";
+import Subtask from "../components/Subtask";
 export default function TaskModal({ colIndex, taskIndex, setIsTaskModalOpen }) {
+  const dispatch = useDispatch()
   const boards = useSelector((state) => state.boards);
   const board = boards.find((board) => board.isActive);
   const columns = board.columns;
@@ -57,18 +59,16 @@ export default function TaskModal({ colIndex, taskIndex, setIsTaskModalOpen }) {
         </p>
         {/* subtasks section */}
         <div className="mt-3 space-y-2">
-          {
-            subtasks.map((subtask , i) =>{
-              return (
-                <Subtask
-                index={index}
+          {subtasks.map((subtask, i) => {
+            return (
+              <Subtask
+                index={i}
                 taskIndex={taskIndex}
                 colIndex={colIndex}
-                key={index}
-                />
-              )
-            })
-          }
+                key={i}
+              />
+            );
+          })}
         </div>
       </div>
     </div>
