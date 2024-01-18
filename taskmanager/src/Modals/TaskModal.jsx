@@ -4,7 +4,7 @@ import elepsis from "../Assets/icon-vertical-ellipsis.svg";
 import ElipsesMenu from "../components/ElipsesMenu";
 import Subtask from "../components/Subtask";
 export default function TaskModal({ colIndex, taskIndex, setIsTaskModalOpen }) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const boards = useSelector((state) => state.boards);
   const board = boards.find((board) => board.isActive);
   const columns = board.columns;
@@ -29,6 +29,10 @@ export default function TaskModal({ colIndex, taskIndex, setIsTaskModalOpen }) {
     //later
   };
 
+  const onChange = (e) => {
+    setStatus(e.target.value);
+    setnewColIndex(e.target.selectIndex);
+  };
   return (
     <div className="fixed right-0 left-0 top-0 px-2 py-4 overflow-scroll scrollbar-hide z-50 bottom-0 justify-center items-center flex bg-[#00000080]">
       <div className="scrollbar-hide  overflow-y-scroll max-h-[95vh] my-auto bg-white dark:bg-[#2b2c37] text-black dark:text-white font-bold shadow-md shadow-[#364e7e1a] max-w-md mx-auto w-full px-8 py-8 rounded-xl ">
@@ -69,6 +73,21 @@ export default function TaskModal({ colIndex, taskIndex, setIsTaskModalOpen }) {
               />
             );
           })}
+        </div>
+        {/* current status section */}
+        <div className="mt-8 , flex flex-col space-y-3 ">
+          <label className="text-sm dark:text-white text-gray-500">
+            current status
+          </label>
+          <select
+            className="select-status flex-grow px-4 py-2 rounded-md text-sm bg-transparent focus:border-0  border border-gray-300 focus:outline-[#365fc7] outline-none"
+            value={status}
+            onChange={onChange}
+          >
+            {columns.map((column, i) => {
+              <option className="status-option">{column.name}</option>;
+            })}
+          </select>
         </div>
       </div>
     </div>
