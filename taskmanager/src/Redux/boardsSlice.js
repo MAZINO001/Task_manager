@@ -105,3 +105,4 @@ export default boardsSlice;
 //+add drageble tasks
 //+when task draget to done => task is done 
 //+add new styling
+// + adding all the new task and changes to the local storage 
