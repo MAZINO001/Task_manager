@@ -100,7 +100,11 @@ const boardsSlice = createSlice({
   },
 });
 
-export default boardsSlice;
+const boardsReducer = boardsSlice.reducer;
+
+export { boardsReducer };
+
+export const boardsActions = boardsSlice.actions;
 //add some chnages on the app 
 //+add drageble tasks
 //+when task draget to done => task is done 
