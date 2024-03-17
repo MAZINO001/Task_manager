@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import crossIcon from "../assets/icon-cross.svg";
-import boardsSlice from "../redux/boardsSlice";
+import boardsSlice from "../Redux/boardsSlice";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
 
-function AddEditBoardModal({ setIsBoardModalOpen, type , }) {
+function AddEditBoardModal({ setIsBoardModalOpen, type }) {
   const dispatch = useDispatch();
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [name, setName] = useState("");
@@ -32,7 +32,7 @@ function AddEditBoardModal({ setIsBoardModalOpen, type , }) {
     if (!name.trim()) {
       return false;
     }
-    for (let i = 0 ; i < newColumns.length ; i++) {
+    for (let i = 0; i < newColumns.length; i++) {
       if (!newColumns[i].name.trim()) {
         return false;
       }
