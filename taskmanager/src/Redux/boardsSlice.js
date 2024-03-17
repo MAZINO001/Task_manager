@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import data from "../Data/data.json";
-
+import { saveToLocalStorage } from "../Hooks/UseLocalStorage"
 const boardsSlice = createSlice({
   name: "boards",
   initialState: data.boards,
@@ -15,12 +15,16 @@ const boardsSlice = createSlice({
       };
       board.columns = payload.newColumns;
       state.push(board);
+
+      console.log(state);
+      saveToLocalStorage(state);
     },
     editBoard: (state, action) => {
       const payload = action.payload;
       const board = state.find((board) => board.isActive);
       board.name = payload.name;
       board.columns = payload.newColumns;
+      saveToLocalStorage(state);
     },
     deleteBoard: (state) => {
       const board = state.find((board) => board.isActive);
@@ -33,6 +37,7 @@ const boardsSlice = createSlice({
           : (board.isActive = false);
         return board;
       });
+      saveToLocalStorage(state);
     },
     addTask: (state, action) => {
       const { title, status, description, subtasks, newColIndex } =
@@ -41,6 +46,7 @@ const boardsSlice = createSlice({
       const board = state.find((board) => board.isActive);
       const column = board.columns.find((col, index) => index === newColIndex);
       column.tasks.push(task);
+      saveToLocalStorage(state);
     },
     editTask: (state, action) => {
       const {
@@ -63,6 +69,7 @@ const boardsSlice = createSlice({
       column.tasks = column.tasks.filter((task, index) => index !== taskIndex);
       const newCol = board.columns.find((col, index) => index === newColIndex);
       newCol.tasks.push(task);
+      saveToLocalStorage(state);
     },
     dragTask: (state, action) => {
       const { colIndex, prevColIndex, taskIndex } = action.payload;
@@ -70,6 +77,7 @@ const boardsSlice = createSlice({
       const prevCol = board.columns.find((col, i) => i === prevColIndex);
       const task = prevCol.tasks.splice(taskIndex, 1)[0];
       board.columns.find((col, i) => i === colIndex).tasks.push(task);
+      saveToLocalStorage(state);
     },
     setSubtaskCompleted: (state, action) => {
       const payload = action.payload;
@@ -78,6 +86,7 @@ const boardsSlice = createSlice({
       const task = col.tasks.find((task, i) => i === payload.taskIndex);
       const subtask = task.subtasks.find((subtask, i) => i === payload.index);
       subtask.isCompleted = !subtask.isCompleted;
+      saveToLocalStorage(state);
     },
     setTaskStatus: (state, action) => {
       const payload = action.payload;
@@ -90,23 +99,22 @@ const boardsSlice = createSlice({
       col.tasks = col.tasks.filter((task, i) => i !== payload.taskIndex);
       const newCol = columns.find((col, i) => i === payload.newColIndex);
       newCol.tasks.push(task);
+      saveToLocalStorage(state);
     },
     deleteTask: (state, action) => {
       const payload = action.payload;
       const board = state.find((board) => board.isActive);
       const col = board.columns.find((col, i) => i === payload.colIndex);
       col.tasks = col.tasks.filter((task, i) => i !== payload.taskIndex);
+      saveToLocalStorage(state);
     },
   },
 });
 
-const boardsReducer = boardsSlice.reducer;
 
-export { boardsReducer };
-
-export const boardsActions = boardsSlice.actions;
-//add some chnages on the app 
+export default boardsSlice;
+//add some chnages on the app
 //+add drageble tasks
-//+when task draget to done => task is done 
+//+when task draget to done => task is done
 //+add new styling
 // + adding all the new task and changes to the local storage 

@@ -10,28 +10,17 @@
 
 // export default store
 
+import { configureStore } from '@reduxjs/toolkit';
+import boardsSlice from './boardsSlice';
+import { getFromLocalStorage } from "../Hooks/UseLocalStorage";
 
-// store.js
-
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-import { boardsReducer } from "./boardsSlice";
-import localStorageMiddleware from "./middleware";
-
-const persistConfig = {
-    key: 'root',
-    storage,
-};
-
-const persistedReducer = persistReducer(persistConfig, boardsReducer);
-
+const initialState = getFromLocalStorage() || boardsSlice.initialState;
+// console.log(getFromLocalStorage())
 const store = configureStore({
-    reducer: persistedReducer,
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({
-            serializableCheck: false,
-        }).concat(localStorageMiddleware),
+    reducer: {
+        boards: boardsSlice.reducer,
+    },
+    initialState,
 });
 
 export default store;
