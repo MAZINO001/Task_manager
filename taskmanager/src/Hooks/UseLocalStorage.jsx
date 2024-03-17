@@ -12,7 +12,6 @@ function getFromLocalStorage() {
 }
 
 function saveToLocalStorage(state) {
-    // console.log(state)
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   } catch (error) {

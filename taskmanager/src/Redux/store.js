@@ -14,8 +14,8 @@ import { configureStore } from '@reduxjs/toolkit';
 import boardsSlice from './boardsSlice';
 import { getFromLocalStorage } from "../Hooks/UseLocalStorage";
 
-const initialState = getFromLocalStorage() || boardsSlice.initialState;
-// console.log(getFromLocalStorage())
+// const initialState = getFromLocalStorage() || boardsSlice.initialState;
+const initialState = getFromLocalStorage();
 const store = configureStore({
     reducer: {
         boards: boardsSlice.reducer,
