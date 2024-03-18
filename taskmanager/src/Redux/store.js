@@ -18,8 +18,8 @@
 
 // const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-// const initialState = getFromLocalStorage() || boardsSlice.initialState;
-// // const initialState = getFromLocalStorage();
+// // const initialState = getFromLocalStorage() || boardsSlice.initialState;
+// const initialState = getFromLocalStorage();
 // const store = configureStore({
 //     reducer: {
 //         boards: persistedReducer(boardsSlice.reducer),
@@ -32,14 +32,14 @@
 
 
 
-// import { configureStore } from "@reduxjs/toolkit";
-// import boardsSlice from "./boardsSlice";
+import { configureStore } from "@reduxjs/toolkit";
+import boardsSlice from "./boardsSlice";
 
 
-// const store = configureStore({
-//     reducer: {
-//         boards: boardsSlice.reducer,
-//     }
-// })
+const store = configureStore({
+    reducer: {
+        boards: boardsSlice.reducer,
+    }
+})
 
-// export default store
+export default store

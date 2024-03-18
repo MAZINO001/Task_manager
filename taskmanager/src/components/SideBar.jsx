@@ -105,8 +105,7 @@ function Sidebar({ isSideBarOpen, setIsSideBarOpen }) {
           {isSideBarOpen ? (
             <div
               onClick={() => toggleSidebar()}
-              // className=" flex  items-center mt-2  absolute bottom-16  text-lg font-bold  rounded-r-full hover:text-[#635FC7] cursor-pointer mr-6 mb-10 px-8 py-3 hover:bg-[#635fc71a] dark:hover:bg-white  space-x-2 justify-center  my-4 text-gray-500 "
-              className=" flex  items-center mt-2  absolute bottom-16  text-lg font-bold  rounded-r-full hover:text-[#635FC7] cursor-pointer mr-5 mb-4 px-12 py-4   space-x-2 justify-center  my-4 text-gray-500 "
+              className=" flex  items-center mt-2  absolute bottom-16  text-lg font-bold  rounded-r-full hover:text-[#635FC7] cursor-pointer mr-5 mb-1 px-12 py-4   space-x-2 justify-center  my-4 text-gray-500 "
             >
               <img
                 className=" min-w-[20px]"
