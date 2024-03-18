@@ -23,18 +23,47 @@ code {
   }
 }
 
-.dropdown{
+.dropdown {
   background-color: #00000080;
 }
 
 .filter-white {
-  filter: invert(100%) sepia(96%) saturate(16%) hue-rotate(350deg)
-    brightness(104%) contrast(100%);
+  filter: invert(100%) sepia(96%) saturate(16%) hue-rotate(350deg) brightness(104%) contrast(100%);
 }
 
-.select-status{
+.select-status {
   background-image: url("./assets/icon-chevron-down.svg");
   appearance: none;
   background-repeat: no-repeat;
   background-position: right 16px top 50%;
+}
+
+.toggleswich {
+  width: 95%;
+  margin: 0 auto;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  /* background: #f1f1f1; */
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #635fc7;
+  border-radius: 2px;
+
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #5956ba;
 }

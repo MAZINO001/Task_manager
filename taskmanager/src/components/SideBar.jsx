@@ -44,12 +44,12 @@ function Sidebar({ isSideBarOpen, setIsSideBarOpen }) {
           {/* reWrite modal  */}
 
           {isSideBarOpen && (
-            <div className=" bg-white  dark:bg-[#2b2c37]    w-full   py-4 rounded-xl">
-              <h3 className=" dark:text-gray-300 text-gray-600 font-semibold mx-4 mb-8 ">
+            <div className=" bg-white  dark:bg-[#2b2c37]    w-full   py-4 rounded-xl relative">
+              <h3 className=" dark:text-gray-300 text-gray-600 font-semibold mx-4 mb-2 ">
                 ALL BOARDS ({boards?.length})
               </h3>
 
-              <div className="  dropdown-borad flex flex-col h-[70vh]  justify-between ">
+              <div className="  dropdown-borad flex flex-col h-[60vh] overflow-auto  justify-between ">
                 <div>
                   {boards.map((board, index) => (
                     <div
@@ -78,7 +78,7 @@ function Sidebar({ isSideBarOpen, setIsSideBarOpen }) {
                   </div>
                 </div>
 
-                <div className=" mx-2 mb-6 p-4 relative space-x-2 bg-slate-100 dark:bg-[#20212c] flex justify-center items-center rounded-lg">
+                <div className=" mx-2 mb-2  p-4 toggleswich h-[60px] space-x-2 bg-slate-100 dark:bg-[#20212c] flex justify-center items-center rounded-lg ">
                   <img src={lightIcon} alt="sun indicating light mode" />
 
                   <Switch
@@ -105,7 +105,7 @@ function Sidebar({ isSideBarOpen, setIsSideBarOpen }) {
           {isSideBarOpen ? (
             <div
               onClick={() => toggleSidebar()}
-              className=" flex  items-center mt-2  absolute bottom-16  text-lg font-bold  rounded-r-full hover:text-[#635FC7] cursor-pointer mr-5 mb-1 px-12 py-4   space-x-2 justify-center  my-4 text-gray-500 "
+              className=" flex  items-center mt-2  absolute bottom-16  text-lg font-bold  rounded-r-full hover:text-[#635FC7] cursor-pointer mr-5 mb-2 px-12 py-4   space-x-2 justify-center  my-4 text-gray-500 "
             >
               <img
                 className=" min-w-[20px]"
