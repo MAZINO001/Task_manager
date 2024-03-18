@@ -1,4 +1,4 @@
-const STORAGE_KEY = "kanbanBoards";
+const STORAGE_KEY = "kanbanData";
 
 function getFromLocalStorage() {
   try {
@@ -19,6 +19,4 @@ function saveToLocalStorage(state) {
   }
 }
 
-// export default [getFromLocalStorage, saveToLocalStorage];
 export { getFromLocalStorage, saveToLocalStorage };
-
