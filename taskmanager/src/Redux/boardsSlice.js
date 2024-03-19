@@ -102,7 +102,5 @@ const boardsSlice = createSlice({
 
 export default boardsSlice;
 //add some chnages on the app
-
 //+add drageble tasks and when task draget to done => task is done === Done 
 //+add new styling === Done
-// + adding all the new task and changes to the local storage 
