@@ -52,3 +52,5 @@ function Task({ colIndex, taskIndex }) {
 }
 
 export default Task;
+//add dragables items later 
+//add a backend for this taskmamanger 
